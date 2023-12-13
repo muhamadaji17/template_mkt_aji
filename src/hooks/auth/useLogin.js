@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { handleSubmit1, validateForm } from "@/src/service/auth/loginService";
+import { handleSubmit1 } from "@/src/service/handling/handling";
 
 const useLogin = () => {
   const [username, setUsername] = useState("");
@@ -9,51 +9,26 @@ const useLogin = () => {
   const [passwordError, setPasswordError] = useState("");
   const router = useRouter();
 
-  // const validateForm = () => {
-  //   let isValid = true;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const url = "login";
 
-  //   if (username === "") {
-  //     setUsernameError("Username is Required");
-  //     isValid = false;
-  //   } else {
-  //     setUsernameError("");
-  //   }
-
-  //   if (password === "") {
-  //     setPasswordError("Password is Required");
-  //     isValid = false;
-  //   } else {
-  //     setPasswordError("");
-  //   }
-
-  //   return isValid;
-  // };
-
+    const fieldConfig = {
+      username: { value: username, setError: setUsernameError },
+      password: { value: password, setError: setPasswordError },
+    };
+    await handleSubmit1(fieldConfig, router, url);
+  };
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
-
-  //   if (validateForm()) {
-  //     const data = {
-  //       username,
-  //       password,
-  //     };
-
-  //     await AuthService(data, router, "login");
-  //   }
+  //   await handleSubmit1(
+  //     username,
+  //     password,
+  //     setUsernameError,
+  //     setPasswordError,
+  //     router
+  //   );
   // };
-
-  validateForm(username, password, setUsernameError, setPasswordError);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    handleSubmit1(
-      username,
-      password,
-      router,
-      setUsernameError,
-      setPasswordError
-    );
-  };
 
   return {
     username,

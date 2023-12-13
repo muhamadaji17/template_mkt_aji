@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import AuthService from "@/src/service/api/authService";
+import { handleSubmit1 } from "@/src/service/handling/handling";
 
 const useRegister = () => {
   const [username, setusername] = useState("");
@@ -20,77 +21,20 @@ const useRegister = () => {
 
   const router = useRouter();
 
-  const validateForm = () => {
-    let isValid = true;
-
-    if (username === "") {
-      setusernameError("Username is Required");
-      isValid = false;
-    } else {
-      setusernameError("");
-    }
-
-    if (password === "") {
-      setPasswordError("Password is Required");
-      isValid = false;
-    } else {
-      setPasswordError("");
-    }
-
-    if (fullname === "") {
-      setFullnameError("FullName is Required");
-      isValid = false;
-    } else {
-      setFullnameError("");
-    }
-
-    if (email === "") {
-      setEmailError("E-Mail is Required");
-      isValid = false;
-    } else {
-      setEmailError("");
-    }
-
-    if (phone === "") {
-      setPhoneError("Phone Number is Required");
-      isValid = false;
-    } else {
-      setPhoneError("");
-    }
-
-    if (dob === "") {
-      setDobError("Birthdate is Required");
-      isValid = false;
-    } else {
-      setDobError("");
-    }
-
-    if (gender === "") {
-      setGenderError("Gender is Required");
-      isValid = false;
-    } else {
-      setGenderError("");
-    }
-
-    return isValid;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      const data = {
-        username,
-        password,
-        fullname,
-        email,
-        phone,
-        dob,
-        gender,
-      };
-
-      await AuthService(data, router, "register");
-    }
+    const url = "register";
+    const fieldConfig = {
+      username: { value: username, setError: setusernameError },
+      password: { value: password, setError: setPasswordError },
+      fullname: { value: fullname, setError: setFullnameError },
+      email: { value: email, setError: setEmailError },
+      phone: { value: phone, setError: setPhoneError },
+      dob: { value: dob, setError: setDobError },
+      gender: { value: gender, setError: setGenderError },
+    };
+    await handleSubmit1(fieldConfig, router, url);
   };
 
   return {

@@ -16,7 +16,7 @@ const FormLogin = () => {
 
   return (
     <div>
-      <div className=" mt-5 lg:ml-40 w-72">
+      <div className=" mt-5 lg:ml-40 w-72 mb-5">
         <InputForms
           name="username"
           placeholder="Username"
@@ -30,7 +30,7 @@ const FormLogin = () => {
           ""
         )}
       </div>
-      <div className="lg:ml-40 w-72 ">
+      <div className="lg:ml-40 w-72 mb-5">
         <InputForms
           name="password"
           placeholder="******"

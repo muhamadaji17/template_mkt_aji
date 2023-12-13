@@ -4,7 +4,7 @@ import SelectOption from "../atoms/selectOptions/select";
 
 const InputForms = ({ title, ...props }) => {
   return (
-    <div className="mb-6">
+    <div className="">
       <Label>{title}</Label>
 
       <Input {...props} />

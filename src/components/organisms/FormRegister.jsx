@@ -41,20 +41,20 @@ const FormRegister = () => {
           title="Full Name"
           onChange={(e) => setFullname(e.target.value)}
         />
-        {/* <div className="none ">
+        <div className="mb-5">
           {usernameError ? (
             <p className=" text-red-600 none">{usernameError}</p>
           ) : (
             ""
           )}
         </div>
-        <div>
+        <div className="mb-5">
           {fullnameError ? (
             <p className="text-red-600 ">{fullnameError}</p>
           ) : (
             ""
           )}
-        </div> */}
+        </div>
       </div>
 
       <div className="sm:grid grid-cols-2 gap-4 sm:mx-10 ">
@@ -65,7 +65,6 @@ const FormRegister = () => {
           title="E-Mail"
           onChange={(e) => setEmail(e.target.value)}
         />
-        {/* {emailError ? <p className="text-red-600">{emailError}</p> : ""} */}
         <InputForms
           name="phone"
           placeholder="Phone Number"
@@ -73,7 +72,12 @@ const FormRegister = () => {
           title="Phone Number"
           onChange={(e) => setPhone(e.target.value)}
         />
-        {/* {phoneError ? <p className="text-red-600">{phoneError}</p> : ""} */}
+        <div className="mb-5">
+          {emailError ? <p className="text-red-600">{emailError}</p> : ""}
+        </div>
+        <div className="mb-5">
+          {phoneError ? <p className="text-red-600">{phoneError}</p> : ""}
+        </div>
       </div>
       <div className="sm:grid grid-cols-2 gap-4 sm:mx-10 ">
         <InputForms
@@ -83,7 +87,6 @@ const FormRegister = () => {
           title="Birthdate"
           onChange={(e) => setDob(e.target.value)}
         />
-        {/* {dobError ? <p className="text-red-600">{dobError}</p> : ""} */}
         <div>
           <Label>Select Gender</Label>
           <SelectOption
@@ -96,7 +99,12 @@ const FormRegister = () => {
             onChange={(e) => setGender(e.target.value)}
             selectTitle="Pilih Jenis Kelamin"
           />
-          {/* {genderError ? <p className="text-red-600">{genderError}</p> : ""} */}
+        </div>
+        <div className="mb-5">
+          {dobError ? <p className="text-red-600">{dobError}</p> : ""}
+        </div>
+        <div className="mb-5">
+          {genderError ? <p className="text-red-600">{genderError}</p> : ""}
         </div>
       </div>
 
@@ -108,11 +116,6 @@ const FormRegister = () => {
           title="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {/* {passwordError ? (
-          <p className="text-red-600 mb-5">{passwordError}</p>
-        ) : (
-          ""
-        )} */}
         <InputForms
           name="confirmpassword"
           placeholder="******"
@@ -120,6 +123,11 @@ const FormRegister = () => {
           title="Confirm Password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        {passwordError ? (
+          <p className="text-red-600 mb-5">{passwordError}</p>
+        ) : (
+          ""
+        )}
       </div>
       <div className="grid grid-cols-2 gap-4 sm:mx-10 mt-5">
         <Buttons type="submit" onClick={handleSubmit} className=" bg-blue-500">
