@@ -1,11 +1,8 @@
-const Input = ({ type, placeholder, name, onChange }) => {
+const Input = ({ ...props }) => {
   return (
     <input
-      type={type}
-      name={name}
+      {...props}
       className="text-sm border rounded w-full py-2 px-3 border-slate-700 placeholder: opacity-50"
-      placeholder={placeholder}
-      onChange={onChange}
     />
   );
 };

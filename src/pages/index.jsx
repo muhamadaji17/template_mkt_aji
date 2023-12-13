@@ -1,5 +1,5 @@
-import FormLogin from "@/components/organisms/FormLogin";
-import AuthLayouts from "@/components/templates/AuthLayouts";
+import FormLogin from "../components/organisms/FormLogin";
+import AuthLayouts from "../components/templates/AuthLayouts";
 
 export default function Home() {
   return (

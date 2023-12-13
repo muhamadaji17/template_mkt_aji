@@ -1,5 +1,5 @@
-import Links from "../atoms/links/Links";
-import FormLogin from "../organisms/FormLogin";
+// import Links from "../atoms/links/Links";
+// import FormLogin from "../organisms/FormLogin";
 
 const AuthLayouts = ({ children, title, header }) => {
   return (

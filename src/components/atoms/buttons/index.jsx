@@ -1,7 +1,7 @@
-const Buttons = ({ children, type, className }) => {
+const Buttons = ({ children, className, ...props }) => {
   return (
     <button
-      type={type}
+      {...props}
       className={`h-10 px-6 font-semibold rounded-md  ${className} text-white`}
     >
       {children}

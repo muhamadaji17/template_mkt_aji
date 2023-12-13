@@ -1,9 +1,9 @@
-import InputForms from "../moleculs/inputForms";
-import Links from "../atoms/links/Links";
-import SelectOption from "../atoms/selectOptions/select";
+import useRegister from "@/src/hooks/auth/useRegister";
+import InputForms from "../moleculs/InputForms";
 import Label from "../atoms/labels/Index";
+import SelectOption from "../atoms/selectOptions/select";
 import Buttons from "../atoms/buttons";
-import useRegister from "@/hooks/auth/useRegister";
+import Links from "../atoms/links/Links";
 
 const FormRegister = () => {
   const {
@@ -25,7 +25,7 @@ const FormRegister = () => {
   } = useRegister();
 
   return (
-    <form action="" onSubmit={handleSubmit} className=" ">
+    <div>
       <div className="sm:grid grid-cols-2 gap-4 sm:mx-10 ">
         <InputForms
           name="username"
@@ -41,7 +41,7 @@ const FormRegister = () => {
           title="Full Name"
           onChange={(e) => setFullname(e.target.value)}
         />
-        <div className="none ">
+        {/* <div className="none ">
           {usernameError ? (
             <p className=" text-red-600 none">{usernameError}</p>
           ) : (
@@ -54,7 +54,7 @@ const FormRegister = () => {
           ) : (
             ""
           )}
-        </div>
+        </div> */}
       </div>
 
       <div className="sm:grid grid-cols-2 gap-4 sm:mx-10 ">
@@ -122,7 +122,7 @@ const FormRegister = () => {
         />
       </div>
       <div className="grid grid-cols-2 gap-4 sm:mx-10 mt-5">
-        <Buttons type="submit" className=" bg-blue-500">
+        <Buttons type="submit" onClick={handleSubmit} className=" bg-blue-500">
           Register
         </Buttons>
         <Buttons type="reset" className=" bg-red-500">
@@ -134,7 +134,7 @@ const FormRegister = () => {
           Already have account ? click here
         </Links>
       </div>
-    </form>
+    </div>
   );
 };
 

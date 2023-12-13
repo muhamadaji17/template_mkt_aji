@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import LoginService from "@/service/api/authService";
+import AuthService from "@/src/service/api/authService";
 
 const useRegister = () => {
   const [username, setusername] = useState("");
@@ -89,7 +89,7 @@ const useRegister = () => {
         gender,
       };
 
-      await LoginService(data, router, "register");
+      await AuthService(data, router, "register");
     }
   };
 
@@ -99,6 +99,8 @@ const useRegister = () => {
     password,
     setPassword,
     usernameError,
+    setusernameError,
+    setPasswordError,
     passwordError,
     fullname,
     setFullname,

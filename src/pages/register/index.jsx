@@ -1,5 +1,5 @@
-import FormRegister from "@/components/organisms/FormRegister";
-import AuthLayouts from "@/components/templates/AuthLayouts";
+import FormRegister from "@/src/components/organisms/FormRegister";
+import AuthLayouts from "@/src/components/templates/AuthLayouts";
 
 export default function Register() {
   return (

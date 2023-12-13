@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const LoginService = async (data, router, method) => {
+const AuthService = async (data, router, method) => {
   try {
     const response = await axios.post(
       `${process.env.API_URL}/api/auth/${method}`,
@@ -12,8 +12,6 @@ const LoginService = async (data, router, method) => {
         },
       }
     );
-    // console.log(response);
-
     if (response) {
       Swal.fire({
         icon: "success",
@@ -43,4 +41,4 @@ const LoginService = async (data, router, method) => {
     });
   }
 };
-export default LoginService;
+export default AuthService;
