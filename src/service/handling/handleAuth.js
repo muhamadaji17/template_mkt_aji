@@ -12,7 +12,7 @@ export const handleSubmit1 = async (fieldConfig, router, url) => {
       data[fieldName] = fieldConfig[fieldName].value;
     }
 
-    await AuthService(data, router, url);
+    // await AuthService(data, router, url);
   }
 
   return isValid;

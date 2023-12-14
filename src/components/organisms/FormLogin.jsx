@@ -1,18 +1,38 @@
-// "use client";
 import useLogin from "@/src/hooks/auth/useLogin";
 import React, { useState } from "react";
 import InputForms from "../moleculs/InputForms";
 import Buttons from "../atoms/buttons";
 import Links from "../atoms/links/Links";
+import { handleSubmit1 } from "@/src/service/handling/handleAuth";
+import LoginPattern from "@/src/patterns/auth/loginPatern";
+import { IoMdEye } from "react-icons/io";
+import { IoMdEyeOff } from "react-icons/io";
 
 const FormLogin = () => {
   const {
-    setUsername,
-    setPassword,
     usernameError,
     passwordError,
-    handleSubmit,
+    username,
+    password,
+    showPassword,
+    setShowPassword,
+    setUsername,
+    setPassword,
+    setPasswordError,
+    setUsernameError,
+    router,
   } = useLogin();
+
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const { fieldConfig, url } = LoginPattern(
+    username,
+    password,
+    setUsernameError,
+    setPasswordError
+  );
 
   return (
     <div>
@@ -30,14 +50,21 @@ const FormLogin = () => {
           ""
         )}
       </div>
-      <div className="lg:ml-40 w-72 mb-5">
+      <div className="lg:ml-40 w-72 mb-5 relative">
         <InputForms
           name="password"
           placeholder="******"
-          type="password"
+          type={showPassword ? "password" : "text"}
           title="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <i className="absolute right-5 top-9 text-2xl">
+          {showPassword ? (
+            <IoMdEye onClick={handleShowPassword} />
+          ) : (
+            <IoMdEyeOff onClick={handleShowPassword} />
+          )}
+        </i>
         {passwordError ? (
           <p className="text-red-600 mb-5">{passwordError}</p>
         ) : (
@@ -45,7 +72,13 @@ const FormLogin = () => {
         )}
       </div>
       <div className="lg:ml-40">
-        <Buttons onClick={handleSubmit} type="submit" className="bg-blue-500">
+        <Buttons
+          onClick={(e) => {
+            e.preventDefault(), handleSubmit1(fieldConfig, router, url);
+          }}
+          type="submit"
+          className="bg-blue-500"
+        >
           Login
         </Buttons>
       </div>

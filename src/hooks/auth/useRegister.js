@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import AuthService from "@/src/service/api/authService";
-import { handleSubmit1 } from "@/src/service/handling/handling";
+import { handleSubmit1 } from "@/src/service/handling/handleAuth";
 
 const useRegister = () => {
   const [username, setusername] = useState("");
@@ -18,24 +17,28 @@ const useRegister = () => {
   const [dobError, setDobError] = useState("");
   const [gender, setGender] = useState("");
   const [genderError, setGenderError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const url = "register";
-    const fieldConfig = {
-      username: { value: username, setError: setusernameError },
-      password: { value: password, setError: setPasswordError },
-      fullname: { value: fullname, setError: setFullnameError },
-      email: { value: email, setError: setEmailError },
-      phone: { value: phone, setError: setPhoneError },
-      dob: { value: dob, setError: setDobError },
-      gender: { value: gender, setError: setGenderError },
-    };
-    await handleSubmit1(fieldConfig, router, url);
-  };
+  //   const url = "register";
+  //   const fieldConfig = {
+  //     username: { value: username, setError: setusernameError },
+  //     password: { value: password, setError: setPasswordError },
+  //     fullname: { value: fullname, setError: setFullnameError },
+  //     email: { value: email, setError: setEmailError },
+  //     phone: { value: phone, setError: setPhoneError },
+  //     dob: { value: dob, setError: setDobError },
+  //     gender: { value: gender, setError: setGenderError },
+  //   };
+  //   await handleSubmit1(fieldConfig, router, url);
+  // };
 
   return {
     username,
@@ -45,6 +48,14 @@ const useRegister = () => {
     usernameError,
     setusernameError,
     setPasswordError,
+    showPassword,
+    setShowPassword,
+    setConfirmPassword,
+    confirmPasswordError,
+    confirmPassword,
+    setConfirmPasswordError,
+    showConfirmPassword,
+    setShowConfirmPassword,
     passwordError,
     fullname,
     setFullname,
@@ -61,7 +72,13 @@ const useRegister = () => {
     gender,
     setGender,
     genderError,
-    handleSubmit,
+    setFullnameError,
+    setEmailError,
+    setPhoneError,
+    setDobError,
+    setGenderError,
+    router,
+    // handleSubmit,
   };
 };
 

@@ -4,6 +4,10 @@ import Label from "../atoms/labels/Index";
 import SelectOption from "../atoms/selectOptions/select";
 import Buttons from "../atoms/buttons";
 import Links from "../atoms/links/Links";
+import { handleSubmit1 } from "@/src/service/handling/handleAuth";
+import SelectedForm from "../moleculs/SelectForm";
+import { IoMdEye } from "react-icons/io";
+import { IoMdEyeOff } from "react-icons/io";
 
 const FormRegister = () => {
   const {
@@ -21,8 +25,64 @@ const FormRegister = () => {
     dobError,
     setGender,
     genderError,
-    handleSubmit,
+    username,
+    password,
+    fullname,
+    email,
+    dob,
+    gender,
+    phone,
+    setusernameError,
+    setFullnameError,
+    setPasswordError,
+    setEmailError,
+    setDobError,
+    setGenderError,
+    setPhoneError,
+    confirmPassword,
+    setConfirmPassword,
+    confirmPasswordError,
+    setConfirmPasswordError,
+    router,
+    showPassword,
+    setShowPassword,
+    showConfirmPassword,
+    setShowConfirmPassword,
   } = useRegister();
+
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const handleShowConfirmPassword = () => {
+    setShowConfirmPassword((prev) => !prev);
+  };
+
+  const url = "register";
+  const fieldConfig = {
+    username: { value: username, setError: setusernameError },
+    password: { value: password, setError: setPasswordError },
+    fullname: { value: fullname, setError: setFullnameError },
+    email: { value: email, setError: setEmailError },
+    phone: { value: phone, setError: setPhoneError },
+    dob: { value: dob, setError: setDobError },
+    gender: { value: gender, setError: setGenderError },
+    confirmPassword: {
+      value: confirmPassword,
+      setError: setConfirmPasswordError,
+    },
+  };
+
+  const selectedGender = [
+    {
+      value: "L",
+      label: "Laki - Laki",
+    },
+    {
+      value: "P",
+      label: "Perempuan",
+    },
+  ];
 
   return (
     <div>
@@ -87,19 +147,13 @@ const FormRegister = () => {
           title="Birthdate"
           onChange={(e) => setDob(e.target.value)}
         />
-        <div>
-          <Label>Select Gender</Label>
-          <SelectOption
-            name="gender"
-            // value={"l"}
-            valueOptions={[
-              { value: "p", label: "Perempuan" },
-              { value: "l", label: "Laki-Laki" },
-            ]}
-            onChange={(e) => setGender(e.target.value)}
-            selectTitle="Pilih Jenis Kelamin"
-          />
-        </div>
+        <SelectedForm
+          title={"Select Gender"}
+          valueOptions={selectedGender}
+          selectTitle={"Pilih Gender"}
+          name={gender}
+          onChange={(e) => setGender(e.target.value)}
+        />
         <div className="mb-5">
           {dobError ? <p className="text-red-600">{dobError}</p> : ""}
         </div>
@@ -109,30 +163,64 @@ const FormRegister = () => {
       </div>
 
       <div className="sm:grid grid-cols-2 gap-4 sm:mx-10 ">
-        <InputForms
-          name="password"
-          placeholder="******"
-          type="password"
-          title="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <InputForms
-          name="confirmpassword"
-          placeholder="******"
-          type="password"
-          title="Confirm Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {passwordError ? (
-          <p className="text-red-600 mb-5">{passwordError}</p>
-        ) : (
-          ""
-        )}
+        <div className="relative">
+          <InputForms
+            name="password"
+            placeholder="******"
+            type={showPassword ? "password" : "text"}
+            title="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <i className="absolute right-4 top-9 text-2xl">
+            {showPassword ? (
+              <IoMdEye onClick={handleShowPassword} />
+            ) : (
+              <IoMdEyeOff onClick={handleShowPassword} />
+            )}
+          </i>
+        </div>
+        <div className="relative">
+          <InputForms
+            name="confirmpassword"
+            placeholder="******"
+            type={showConfirmPassword ? "password" : "text"}
+            title="Confirm Password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <i className="absolute right-4 top-9 text-2xl">
+            {showConfirmPassword ? (
+              <IoMdEye onClick={handleShowConfirmPassword} />
+            ) : (
+              <IoMdEyeOff onClick={handleShowConfirmPassword} />
+            )}
+          </i>
+        </div>
+        <div>
+          {passwordError ? (
+            <p className="text-red-600 mb-5">{passwordError}</p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div>
+          {confirmPasswordError ? (
+            <p className="text-red-600 mb-5">{confirmPasswordError}</p>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-4 sm:mx-10 mt-5">
-        <Buttons type="submit" onClick={handleSubmit} className=" bg-blue-500">
+        <Buttons
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault(), handleSubmit1(fieldConfig, router, url);
+          }}
+          className="bg-blue-500"
+        >
           Register
         </Buttons>
+
         <Buttons type="reset" className=" bg-red-500">
           Cancel
         </Buttons>

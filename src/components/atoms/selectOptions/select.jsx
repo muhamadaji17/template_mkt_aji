@@ -1,11 +1,6 @@
-const SelectOption = ({ name, value, valueOptions, onChange, selectTitle }) => {
+const SelectOption = ({ valueOptions, selectTitle, ...props }) => {
   return (
-    <select
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="h-10 border px-2"
-    >
+    <select {...props} className="h-10 border px-2 border-slate-700">
       <option value="example" disabled>
         {selectTitle}
       </option>
